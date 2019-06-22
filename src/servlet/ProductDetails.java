@@ -34,7 +34,7 @@ public class ProductDetails extends HttpServlet {
 
 		if(name != null) {
 			RequestDispatcher dispatcher =
-					request.getRequestDispatcher("/Negitoro.jsp");
+					request.getRequestDispatcher("/WEB-INF/jsp/Negitoro.jsp");
 			dispatcher.forward(request,response);
 		}
 	}

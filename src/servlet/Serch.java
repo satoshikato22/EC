@@ -50,7 +50,7 @@ public class Serch extends HttpServlet {
 		session.setAttribute("ss", ss);
 
 		RequestDispatcher dispatcher=
-				request.getRequestDispatcher("/serchResult.jsp");
+				request.getRequestDispatcher("/WEB-INF/jsp/serchResult.jsp");
 		dispatcher.forward(request, response);
 	}
 

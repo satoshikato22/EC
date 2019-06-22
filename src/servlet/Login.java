@@ -31,7 +31,7 @@ public class Login extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		RequestDispatcher dispatcher =
-				request.getRequestDispatcher("/login.jsp");
+				request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 		dispatcher.forward(request,response);
 
 	}

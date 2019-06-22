@@ -34,7 +34,7 @@ public class RegisterUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		RequestDispatcher dispatcher =
-				request.getRequestDispatcher("/registerUser.jsp");
+				request.getRequestDispatcher("/WEB-INF/jsp/registerUser.jsp");
 		dispatcher.forward(request,response);
 	}
 
@@ -65,11 +65,12 @@ public class RegisterUser extends HttpServlet {
 			session.setAttribute("user", u);
 
 			RequestDispatcher dispatcher =
-					request.getRequestDispatcher("/registerConfirm.jsp");
+					request.getRequestDispatcher("/WEB-INF/jsp/registerConfirm.jsp");
 			dispatcher.forward(request,response);
 		}else {
+			session.setAttribute("user", u);
 			RequestDispatcher dispatcher =
-					request.getRequestDispatcher("/registerError.jsp");
+					request.getRequestDispatcher("/WEB-INF/jsp/registerError.jsp");
 			dispatcher.forward(request,response);
 		}
 	}

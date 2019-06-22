@@ -74,12 +74,12 @@ public class RegisterResult extends HttpServlet {
 			RegisterInsert ri = new RegisterInsert();
 			ri.insert(u);
 			RequestDispatcher dispatcher =
-					request.getRequestDispatcher("/RegisterThanks.jsp");
+					request.getRequestDispatcher("/WEB-INF/jsp/RegisterThanks.jsp");
 			dispatcher.forward(request,response);
 		}else {
 			session.setAttribute("user", u);
 			RequestDispatcher dispatcher =
-					request.getRequestDispatcher("/registerDuplicateError.jsp");
+					request.getRequestDispatcher("/WEB-INF/jsp/registerDuplicateError.jsp");
 			dispatcher.forward(request,response);
 		}
 	}

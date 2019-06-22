@@ -56,11 +56,11 @@ public class LoginUser extends HttpServlet {
 		if(lu.getIsbool()) {
 			session.setAttribute("loginUser", lu);
 			RequestDispatcher dispatcher =
-					request.getRequestDispatcher("/loginResult.jsp");
+					request.getRequestDispatcher("/WEB-INF/jsp/loginResult.jsp");
 			dispatcher.forward(request,response);
 		}else {
 			RequestDispatcher dispatcher =
-					request.getRequestDispatcher("/loginError.jsp");
+					request.getRequestDispatcher("/WEB-INF/jsp/loginError.jsp");
 			dispatcher.forward(request,response);
 		}
 	}
