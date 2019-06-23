@@ -11,7 +11,7 @@ public class testSelectUserInfo {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:8889/docoTsubu", "satoshi", "ktud3104");
+					"jdbc:mysql://localhost:8889/EC", "admin", "admin");
 
 			String sql = "select * from product where name like '%軍艦%'";
 

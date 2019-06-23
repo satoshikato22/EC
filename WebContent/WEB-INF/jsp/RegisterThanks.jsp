@@ -25,7 +25,7 @@ public void jspInit(){
 	try {
         // データベースに接続するConnectionオブジェクトの取得
         conn = DriverManager.getConnection(
-		  "jdbc:mysql://localhost:8889/docoTsubu", "satoshi", "ktud3104");
+		  "jdbc:mysql://localhost:8889/EC", "admin", "admin");
         // データベース操作を行うためのStatementオブジェクトの取得
         stmt = conn.createStatement();
         // SQL()を実行して、結果を得る

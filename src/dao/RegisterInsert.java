@@ -16,7 +16,7 @@ public class RegisterInsert {
 
 	      // データベースへ接続
 	      conn = DriverManager.getConnection(
-	    		  "jdbc:mysql://localhost:8889/docoTsubu", "satoshi", "ktud3104");
+	    		  "jdbc:mysql://localhost:8889/EC", "admin", "admin");
 
 	      // SELECT文を準備
 	      String sql = "insert into userinfo (userid,name,pass,mail,address) values(null,?,?,?,?)";

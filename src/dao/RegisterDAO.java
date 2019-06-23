@@ -15,7 +15,7 @@ public class RegisterDAO {
 
 	      // データベースへ接続
 	      conn = DriverManager.getConnection(
-	    		  "jdbc:mysql://localhost:8889/docoTsubu", "satoshi", "ktud3104");
+	    		  "jdbc:mysql://localhost:8889/EC", "admin", "admin");
 
 	      // SELECT文を準備
 	      
