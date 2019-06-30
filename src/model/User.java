@@ -9,6 +9,7 @@ public class User implements Serializable {
 	private String mail;
 	private String address;
 	private boolean isbool;
+	private boolean selectbool;
 
 	public String getName() {
 		return name;
@@ -57,5 +58,13 @@ public class User implements Serializable {
 
 	public void setIsbool(boolean isbool) {
 		this.isbool = isbool;
+	}
+
+	public boolean getSelectbool() {
+		return selectbool;
+	}
+
+	public void setSelectbool(boolean selectbool) {
+		this.selectbool = selectbool;
 	}
 }

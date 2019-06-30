@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.RegisterInsert;
-import dao.RegisterSelect;
 import model.User;
 import model.UserLogic;
 
@@ -65,14 +64,10 @@ public class RegisterUser extends HttpServlet {
 		UserLogic ul = new UserLogic();
 		ul.execute(u);
 
-		RegisterSelect rs = new RegisterSelect();
-		try {
-			rs.select(u);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
-		if(u.getIsbool()) {
+
+		if(u.getIsbool() == true && u.getSelectbool() == true) {
+
 			session.setAttribute("user", u);
 
 			RegisterInsert ri = new RegisterInsert();
@@ -81,6 +76,7 @@ public class RegisterUser extends HttpServlet {
 			RequestDispatcher dispatcher =
 					request.getRequestDispatcher("/WEB-INF/jsp/RegisterThanks.jsp");
 			dispatcher.forward(request,response);
+
 		}else {
 			session.setAttribute("user", u);
 			RequestDispatcher dispatcher =
@@ -88,5 +84,4 @@ public class RegisterUser extends HttpServlet {
 			dispatcher.forward(request,response);
 		}
 	}
-
 }

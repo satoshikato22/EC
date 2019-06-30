@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.RegisterInsert;
-import dao.RegisterSelect;
 import model.User;
 import model.UserLogic;
 
@@ -45,6 +44,7 @@ public class RegisterResult extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("name");
+		String text = request.getParameter("text");
 		String pass = request.getParameter("pass");
 		String mail = request.getParameter("mail");
 		String address = request.getParameter("address");
@@ -54,6 +54,7 @@ public class RegisterResult extends HttpServlet {
 
 		User u = new User();
 		u.setName(name);
+		u.setText(text);
 		u.setPass(pass);
 		u.setMail(mail);
 		u.setAddress(address);
@@ -61,29 +62,24 @@ public class RegisterResult extends HttpServlet {
 		UserLogic ul = new UserLogic();
 		ul.execute(u);
 
-		RegisterSelect rs = new RegisterSelect();
-		try {
-			rs.select(u);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
+		if(u.getIsbool() == true && u.getSelectbool() == true) {
 
-		if(u.getIsbool()) {
 			session.setAttribute("user", u);
+
 			RegisterInsert ri = new RegisterInsert();
 			ri.insert(u);
+
 			RequestDispatcher dispatcher =
 					request.getRequestDispatcher("/WEB-INF/jsp/RegisterThanks.jsp");
 			dispatcher.forward(request,response);
+
 		}else {
 			session.setAttribute("user", u);
 			RequestDispatcher dispatcher =
-					request.getRequestDispatcher("/WEB-INF/jsp/registerDuplicateError.jsp");
+					request.getRequestDispatcher("/WEB-INF/jsp/registerError.jsp");
 			dispatcher.forward(request,response);
 		}
 	}
 
-
 	}
-
