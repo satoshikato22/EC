@@ -15,16 +15,16 @@ import model.User;
 import model.UserLogic;
 
 /**
- * Servlet implementation class RegisterUser
+ * Servlet implementation class RegisterResult
  */
-@WebServlet("/RegisterUser")
-public class RegisterUser extends HttpServlet {
+@WebServlet("/RegisterResult")
+public class RegisterResult extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterUser() {
+    public RegisterResult() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,9 +34,7 @@ public class RegisterUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher =
-				request.getRequestDispatcher("/WEB-INF/jsp/registerUser.jsp");
-		dispatcher.forward(request,response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -65,7 +63,6 @@ public class RegisterUser extends HttpServlet {
 		ul.execute(u);
 
 
-
 		if(u.getIsbool() == true && u.getSelectbool() == true) {
 
 			session.setAttribute("user", u);
@@ -84,4 +81,5 @@ public class RegisterUser extends HttpServlet {
 			dispatcher.forward(request,response);
 		}
 	}
-}
+
+	}

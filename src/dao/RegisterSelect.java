@@ -35,9 +35,9 @@ public class RegisterSelect {
         	 pass = rs.getString("pass");
           }
           if(pass != null) {
-        	  u.setIsbool(false);
+        	  u.setSelectbool(false);
           }else {
-        	  u.setIsbool(true);
+        	  u.setSelectbool(true);
 
           }
 

@@ -1,14 +1,26 @@
 package model;
 
+import java.util.regex.Pattern;
+
+import dao.RegisterSelect;
+
 public class UserLogic {
 	public void execute(User u) {
-		boolean isbool;
 		String pass = u.getPass();
+		if(Pattern.matches("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,}",pass)) {
+			RegisterSelect rs = new RegisterSelect();
+			try {
+				rs.select(u);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
-		if(isbool = pass.matches("[a-zA-Z0-9]{8,}")) {
-			u.setIsbool(isbool);
-		}else {
-			u.setIsbool(isbool);
-		}
+			u.setIsbool(true);
+
+	}else {
+		u.setIsbool(false);
+
 	}
 }
+}
+
