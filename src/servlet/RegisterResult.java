@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.RegisterInsert;
-import model.User;
-import model.UserLogic;
+import entity.User;
+import logic.UserLogic;
 
 /**
  * Servlet implementation class RegisterResult

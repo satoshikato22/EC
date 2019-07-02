@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import model.User;
+import entity.User;
 
 public class RegisterSelect {
 	public void select(User u) {

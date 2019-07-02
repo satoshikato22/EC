@@ -1,4 +1,4 @@
-package model;
+package entity;
 import java.io.Serializable;
 
 public class SerchSelect implements Serializable{
@@ -10,5 +10,5 @@ public class SerchSelect implements Serializable{
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
+
 }

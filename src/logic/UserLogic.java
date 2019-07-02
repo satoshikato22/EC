@@ -1,4 +1,4 @@
-package model;
+package logic;
 
 import java.util.regex.Pattern;
 
@@ -23,4 +23,3 @@ public class UserLogic {
 	}
 }
 }
-

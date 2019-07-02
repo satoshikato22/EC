@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import model.User;
+import entity.User;
 
 public class RegisterInsert {
 	public void insert(User u) {

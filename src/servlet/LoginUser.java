@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.loginUser;
-import model.loginUserLogic;
+import entity.loginUser;
+import entity.loginUserLogic;
 
 /**
  * Servlet implementation class LoginUser
