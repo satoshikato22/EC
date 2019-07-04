@@ -46,13 +46,13 @@ public class UserInfoDAO
 		{
 			// SQL文を動的に設定する
 			preStatement = getConnection ().prepareStatement ( sql );
-			preStatement.setString ( 1, userId );
+			preStatement.setInt ( 1, userId );
 
 			// 取得データをオブジェクトに設定する
 			resultSet = preStatement.executeQuery ();
 			if ( resultSet.next () )
 			{
-				int userId = resultSet.getString ( "USERID" );
+				int userId = resultSet.getInt ( "USERID" );
 				String name = resultSet.getString ( "NAME" );
 				String pass = resultSet.getString ( "PASS" );
 				String mail = resultSet.getString ( "MAIL" );
@@ -113,7 +113,7 @@ public class UserInfoDAO
 			resultSet = preStatement.executeQuery ();
 			if ( resultSet.next () )
 			{
-				int userId = resultSet.getString ( "USERID" );
+				int userId = resultSet.getInt ( "USERID" );
 				String name = resultSet.getString ( "NAME" );
 				String pass = resultSet.getString ( "PASS" );
 				String mail = resultSet.getString ( "MAIL" );
