@@ -147,6 +147,52 @@ public class UserInfoDAO
 	}
 
 	/**
+	 * USERINFOテーブルに、ユーザ情報を登録する。
+	 * @param ユーザ情報
+	 * @return 登録結果 true:登録成功, false:登録失敗
+	 * @throws java.sql.SQLException SQL関連の例外を投げる
+	 */
+	public boolean insertUserInfo ( UserInfo userInfo ) throws SQLException
+	{
+		// 登録結果 true:登録成功, false:登録失敗
+		boolean hasRegistered = false;
+
+		// データ取得の準備
+		String sql = "INSERT INTO USERINFO ( USERID, NAME, PASS, MAIL, ADDRESS )"
+			+ " VALUES ( NULL, ?, ?, ?, ? )"
+		PreparedStatement preStatement = null;
+
+		try
+		{
+			// SQL文を動的に設定する
+			preStatement = getConnection ().prepareStatement ( sql );
+			preStatement.setString ( 1, userInfo.getName () );
+			preStatement.setString ( 2, userInfo.getPass () );
+			preStatement.setString ( 3, userInfo.getMail () );
+			preStatement.setString ( 4, userInfo.getAddress () );
+
+			if ( 1 <= preStatement.executeUpdate () )
+			{
+				// 1件以上の更新がある場合
+				hasRegistered = true;
+			}
+		}
+		finally
+		{
+			try
+			{
+				// 後処理
+				if ( preStatement != null )
+				{
+					preStatement.close ();
+				}
+			}
+		}
+
+		return hasRegistered;
+	}
+
+	/**
 	 * SQLのコネクションを取得する。
 	 * @return SQLのコネクション
 	 */
