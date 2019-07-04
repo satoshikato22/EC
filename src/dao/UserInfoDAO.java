@@ -8,12 +8,17 @@ import java.sql.SQLException;
 import entity.UserInfo;
 
 /**
- * USERINFOテーブルとのCRUDを行う。
+ * USERINFOテーブルとのCRUDを行うためのクラス。
  */
 public class UserInfoDAO
 {
+	/** SQLのコネクション */
 	private Connection connection;
 
+	/**
+	 * SQLのコネクションを設定する。
+	 * @param SQLのコネクション
+	 */
 	public UserInfoDAO ( Connection connection )
 	{
 		this.connection = connection;
@@ -26,8 +31,10 @@ public class UserInfoDAO
 	 */
 	public UserInfo selectUserInfoByUserId ( int userId )
 	{
+		// ユーザ情報
 		UserInfo userInfo = null;
 
+		// データ取得の準備
 		String sql = "SELECT USERID, NAME, PASS, MAIL, ADDRESS"
 			+ " FROM USERINFO"
 			+ " WHERE USERID = ?";
@@ -36,9 +43,11 @@ public class UserInfoDAO
 
 		try
 		{
+			// SQL文を動的に設定する
 			preStatement = connection.prepareStatement ( sql );
 			preStatement.setString ( 1, userId );
 
+			// 取得データをオブジェクトに設定する
 			resultSet = preStatement.executeQuery ();
 			if ( resultSet.next () )
 			{
@@ -64,6 +73,7 @@ public class UserInfoDAO
 		{
 			try
 			{
+				// 後処理
 				if ( preStatement != null )
 				{
 					preStatement.close ();
