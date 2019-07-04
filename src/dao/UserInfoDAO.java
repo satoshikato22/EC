@@ -21,7 +21,7 @@ public class UserInfoDAO
 	 */
 	public UserInfoDAO ( Connection connection )
 	{
-		this.connection = connection;
+		setConnection ( connection );
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class UserInfoDAO
 		try
 		{
 			// SQL文を動的に設定する
-			preStatement = connection.prepareStatement ( sql );
+			preStatement = getConnection ().prepareStatement ( sql );
 			preStatement.setString ( 1, userId );
 
 			// 取得データをオブジェクトに設定する
@@ -90,5 +90,23 @@ public class UserInfoDAO
 		}
 
 		return userInfo;
+	}
+
+	/**
+	 * SQLのコネクションを取得する。
+	 * @return SQLのコネクション
+	 */
+	public Connection getConnection ()
+	{
+		return connection;
+	}
+
+	/**
+	 * SQLのコネクションを設定する。
+	 * @param SQLのコネクション
+	 */
+	public void setConnection ( Connection connection )
+	{
+		this.connection = connection;
 	}
 }
