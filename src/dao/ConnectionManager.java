@@ -18,6 +18,19 @@ public class ConnectionManager
     /** データベースアクセス用パスワード */
     private static final String PASSWORD;
 
+	/**
+	 * データベースアクセスの設定を行う。
+	 * @param データベースアクセス用URL
+	 * @param データベースアクセス用ユーザ名
+	 * @param データベースアクセス用パスワード
+	 */
+	public ConnectionManager ( String url, String user, String password )
+	{
+		URL = url;
+		USER = user;
+		PASSWORD = password;
+	}
+
     /**
      * データベースのConnectionを取得する。
      * @return コネクション
