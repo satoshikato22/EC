@@ -9,7 +9,7 @@ public class User implements Serializable {
 	private String mail;
 	private String address;
 	private boolean isbool;
-	private boolean selectbool;
+	private boolean selectbool = true;
 
 	public String getName() {
 		return name;

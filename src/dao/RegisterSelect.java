@@ -20,26 +20,26 @@ public class RegisterSelect {
 	    		  "jdbc:mysql://localhost:8889/EC", "admin", "admin");
 
 	      // SELECT文を準備
-	      String sql = "select pass,mail from userinfo where pass = ? and mail = ?";
+	      String sql = "select mail from userinfo where mail = ?";
 	      PreparedStatement pStmt = conn.prepareStatement(sql);
-	      pStmt.setString(1,u.getPass());
-          pStmt.setString(2,u.getMail());
+	      //pStmt.setString(1,u.getPass());
+          pStmt.setString(1,u.getMail());
 
           ResultSet rs = pStmt.executeQuery();
 
-          String pass = null;
+         // String pass = null;
+          String mail = null;
 
 
           while(rs.next()) {
 
-        	 pass = rs.getString("pass");
+        	// pass = rs.getString("pass");
+        	 mail = rs.getString("mail");
+        	 if(mail.equals(u.getMail())) {
+        		 u.setSelectbool(false);
+        	 }
           }
-          if(pass != null) {
-        	  u.setSelectbool(false);
-          }else {
-        	  u.setSelectbool(true);
 
-          }
 
 	    } catch (SQLException e) {
 	      e.printStackTrace();
