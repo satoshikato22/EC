@@ -28,8 +28,9 @@ public class UserInfoDAO
 	 * USERINFOテーブルから、ユーザIDに該当する情報を検索する。
 	 * @param ユーザID
 	 * @return ユーザ情報
+	 * @throws java.sql.SQLException SQL関連の例外を投げる
 	 */
-	public UserInfo selectUserInfoByUserId ( int userId )
+	public UserInfo selectUserInfoByUserId ( int userId ) throws SQLException
 	{
 		// ユーザ情報
 		UserInfo userInfo = null;
@@ -65,10 +66,6 @@ public class UserInfoDAO
 				userInfo.setAddress ( address );
 			}
 		}
-		catch ( SQLException exception )
-		{
-			e.printStackTrace ();
-		}
 		finally
 		{
 			try
@@ -82,10 +79,6 @@ public class UserInfoDAO
 				{
 					resultSet.close ();
 				}
-			}
-			catch ( SQLException exception )
-			{
-				e.printStackTrace ();
 			}
 		}
 
