@@ -30,7 +30,7 @@ public class UserInfoDAO
 	 * @return ユーザ情報
 	 * @throws java.sql.SQLException SQL関連の例外を投げる
 	 */
-	public UserInfo selectUserInfoByUserId ( int userId ) throws SQLException
+	public UserInfo selectUserInfoByUserId ( int keywordsUserId ) throws SQLException
 	{
 		// ユーザ情報
 		UserInfo userInfo = null;
@@ -46,7 +46,7 @@ public class UserInfoDAO
 		{
 			// SQL文を動的に設定する
 			preStatement = getConnection ().prepareStatement ( sql );
-			preStatement.setInt ( 1, userId );
+			preStatement.setInt ( 1, keywordsUserId );
 
 			// 取得データをオブジェクトに設定する
 			resultSet = preStatement.executeQuery ();
@@ -88,7 +88,7 @@ public class UserInfoDAO
 	 * @return ユーザ情報
 	 * @throws java.sql.SQLException SQL関連の例外を投げる
 	 */
-	public UserInfo selectUserInfoByMail ( String mail ) throws SQLException
+	public UserInfo selectUserInfoByMail ( String keywordsMail ) throws SQLException
 	{
 		// ユーザ情報
 		UserInfo userInfo = null;
@@ -104,7 +104,7 @@ public class UserInfoDAO
 		{
 			// SQL文を動的に設定する
 			preStatement = getConnection ().prepareStatement ( sql );
-			preStatement.setString ( 1, mail );
+			preStatement.setString ( 1, keywordsMail );
 
 			// 取得データをオブジェクトに設定する
 			resultSet = preStatement.executeQuery ();
