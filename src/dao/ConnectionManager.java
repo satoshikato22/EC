@@ -10,13 +10,13 @@ import java.sql.SQLException;
 public class ConnectionManager
 {
     /** データベースアクセス用URL */
-    private static final String URL;
+    private String URL;
 
     /** データベースアクセス用ユーザ名 */
-    private static final String USER;
+    private String USER;
 
     /** データベースアクセス用パスワード */
-    private static final String PASSWORD;
+    private String PASSWORD;
 
 	/**
 	 * データベースアクセスの設定を行う。
