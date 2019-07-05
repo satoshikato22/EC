@@ -68,17 +68,14 @@ public class UserInfoDAO
 		}
 		finally
 		{
-			try
+			// 後処理
+			if ( preStatement != null )
 			{
-				// 後処理
-				if ( preStatement != null )
-				{
-					preStatement.close ();
-				}
-				if ( resultSet != null )
-				{
-					resultSet.close ();
-				}
+				preStatement.close ();
+			}
+			if ( resultSet != null )
+			{
+				resultSet.close ();
 			}
 		}
 
@@ -129,17 +126,14 @@ public class UserInfoDAO
 		}
 		finally
 		{
-			try
-			{
 				// 後処理
-				if ( preStatement != null )
-				{
-					preStatement.close ();
-				}
-				if ( resultSet != null )
-				{
-					resultSet.close ();
-				}
+			if ( preStatement != null )
+			{
+				preStatement.close ();
+			}
+			if ( resultSet != null )
+			{
+				resultSet.close ();
 			}
 		}
 
@@ -179,13 +173,10 @@ public class UserInfoDAO
 		}
 		finally
 		{
-			try
+			// 後処理
+			if ( preStatement != null )
 			{
-				// 後処理
-				if ( preStatement != null )
-				{
-					preStatement.close ();
-				}
+				preStatement.close ();
 			}
 		}
 
