@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entity.loginUser;
-import entity.loginUserLogic;
+import logic.loginUserLogic;
 
 /**
  * Servlet implementation class LoginUser

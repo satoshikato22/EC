@@ -3,6 +3,7 @@ package logic;
 import java.util.regex.Pattern;
 
 import dao.RegisterSelect;
+import entity.User;
 
 public class UserLogic {
 	public void execute(User u) {
