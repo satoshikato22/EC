@@ -153,7 +153,7 @@ public class UserInfoDAO
 
 		// データ取得の準備
 		String sql = "INSERT INTO USERINFO ( USERID, NAME, PASS, MAIL, ADDRESS )"
-			+ " VALUES ( NULL, ?, ?, ?, ? )"
+			+ " VALUES ( NULL, ?, ?, ?, ? )";
 		PreparedStatement preStatement = null;
 
 		try
