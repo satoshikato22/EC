@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import action.AccountRegistrationAction;
 import action.Action;
 import action.LoginAction;
 
@@ -58,11 +59,13 @@ public class FrontController extends HttpServlet
 		switch ( targetId )
 		{
 			case "LOGIN":
-				Action action = new LoginAction ();
-				action.execute ( request );
+				Action loginAction = new LoginAction ();
+				transitionPage = loginAction.execute ( request );
 			break;
 
 			case "ACC_REGIST":
+				Action accRegistAction = new AccountRegistrationAction ();
+				transitionPage = accRegistAction.execute ( request );
 			break;
 
 			case "GOTO_LOGIN":
