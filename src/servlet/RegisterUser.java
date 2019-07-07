@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,9 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.RegisterInsert;
-import model.User;
-import model.UserLogic;
+import dao.ConnectionManager;
+import dao.UserInfoDAO;
+import entity.UserInfo;
+import logic.UserLogic;
 
 /**
  * Servlet implementation class RegisterUser
@@ -46,7 +48,6 @@ public class RegisterUser extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("name");
-		String text = request.getParameter("text");
 		String pass = request.getParameter("pass");
 		String mail = request.getParameter("mail");
 		String address = request.getParameter("address");
@@ -54,31 +55,47 @@ public class RegisterUser extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.removeAttribute("user");
 
-		User u = new User();
-		u.setName(name);
-		u.setText(text);
-		u.setPass(pass);
-		u.setMail(mail);
-		u.setAddress(address);
+		UserInfo userInfo = new UserInfo ();
+		userInfo.setName ( name );
+		userInfo.setPass ( pass );
+		userInfo.setMail ( mail );
+		userInfo.setAddress ( address );
 
 		UserLogic ul = new UserLogic();
-		ul.execute(u);
 
+		if(ul.execute(userInfo)) {
 
+			session.setAttribute("user", userInfo);
 
-		if(u.getIsbool() == true && u.getSelectbool() == true) {
-
-			session.setAttribute("user", u);
-
-			RegisterInsert ri = new RegisterInsert();
-			ri.insert(u);
+			// DBにユーザ情報登録
+			ConnectionManager conManager = new ConnectionManager ( "jdbc:mysql://localhost:8889/EC", "admin", "admin" );
+			try
+			{
+				UserInfoDAO userInfoDao = new UserInfoDAO ( conManager.getConnection () );
+				userInfoDao.insertUserInfo ( userInfo );
+			}
+			catch ( SQLException e )
+			{
+				e.printStackTrace ();
+			}
+			finally
+			{
+				try
+				{
+					conManager.getConnection ().close ();
+				}
+				catch ( SQLException e )
+				{
+					e.printStackTrace ();
+				}
+			}
 
 			RequestDispatcher dispatcher =
 					request.getRequestDispatcher("/WEB-INF/jsp/RegisterThanks.jsp");
 			dispatcher.forward(request,response);
 
 		}else {
-			session.setAttribute("user", u);
+			session.setAttribute("user", userInfo);
 			RequestDispatcher dispatcher =
 					request.getRequestDispatcher("/WEB-INF/jsp/registerError.jsp");
 			dispatcher.forward(request,response);

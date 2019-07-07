@@ -1,4 +1,4 @@
-package dao;
+package logic;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,8 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RegisterDAO {
-	public boolean insert(String name,String pass,String mail,String address) {
+import entity.loginUser;
+
+public class loginUserLogic {
+	public void execute(loginUser lu) {
 		Connection conn = null;
 	    try {
 	      // JDBCドライバを読み込み
@@ -18,36 +20,26 @@ public class RegisterDAO {
 	    		  "jdbc:mysql://localhost:8889/EC", "admin", "admin");
 
 	      // SELECT文を準備
-	      
-	      PreparedStatement pStmt = conn.prepareStatement("select ?,? from userinfo");
-	      pStmt.setString(1,mail);
-          pStmt.setString(2,pass);
+	      String sql = "select * from userinfo where pass = ? and mail = ?";
+	      PreparedStatement pStmt = conn.prepareStatement(sql);
+	      pStmt.setString(1,lu.getPass());
+          pStmt.setString(2,lu.getMail());
 
           ResultSet rs = pStmt.executeQuery();
 
-          String Pass = null;
-          String Mail = null;
-
+          String pass = null;
+          String mail = null;
+          String name = null;
           while(rs.next()) {
-        	 Mail = rs.getString("mail");
-        	 Pass = rs.getString("pass");
+        	  pass = rs.getString("pass");
+        	  mail = rs.getString("mail");
+        	  name = rs.getString("name");
           }
-          if(Mail != mail) {
-        	  return false;
-          }
-          if(Pass != pass) {
-        	  return false;
-          }
-
-          else {
-        	 pStmt =
-        	conn.prepareStatement("insert into userinfo(userid,name,pass,mail,address)values(null,?,?,?,?)");
-        	 pStmt.setString(1, name);
-        	 pStmt.setString(2, pass);
-        	 pStmt.setString(3, mail);
-        	 pStmt.setString(4, address);
-        	 pStmt.executeUpdate();
-        	 conn.commit();
+          if(pass == null || mail == null) {
+        	  lu.setIsbool(false);
+          }else {
+        	  lu.setIsbool(true);
+        	  lu.setName(name);
           }
 
 	      // SELECTを実行し、結果表（ResultSet）を取得
@@ -68,7 +60,6 @@ public class RegisterDAO {
 	          e.printStackTrace();
 	        }
 	      }
-	      }
-	    return true;
+  }
 	}
 }
