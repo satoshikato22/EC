@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.RegisterInsert;
+import dao.ConnectionManager;
+import dao.UserInfoDAO;
 import entity.User;
+import entity.UserInfo;
 import logic.UserLogic;
 
 /**
@@ -70,8 +73,28 @@ public class RegisterUser extends HttpServlet {
 
 			session.setAttribute("user", u);
 
+/*
 			RegisterInsert ri = new RegisterInsert();
 			ri.insert(u);
+*/
+			// 段階的に移し替えていくためにUserから情報を取得
+			UserInfo userInfo = new UserInfo ();
+			userInfo.setName ( u.getName () );
+			userInfo.setPass ( u.getPass () );
+			userInfo.setMail ( u.getMail () );
+			userInfo.setAddress ( u.getAddress () );
+
+			// DBにユーザ情報登録
+			ConnectionManager conManager = new ConnectionManager ( "jdbc:mysql://localhost:8889/EC", "admin", "admin" );
+			try
+			{
+				UserInfoDAO userInfoDao = new UserInfoDAO ( conManager.getConnection () );
+				userInfoDao.insertUserInfo ( userInfo );
+			}
+			catch ( SQLException e )
+			{
+				e.printStackTrace ();
+			}
 
 			RequestDispatcher dispatcher =
 					request.getRequestDispatcher("/WEB-INF/jsp/RegisterThanks.jsp");
