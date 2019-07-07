@@ -9,17 +9,13 @@
 <body>
 <h1>TOP画面</h1>
 <p>検索キーワードを入力してください</p>
-<%-- <form action="/EC/Serch" method="post"> --%>
 <form action="/EC/FrontController" method="post">
 <input type="text" name="keyword">
-<%-- <input type="submit" value="検索"><br> --%>
 <button type="submit" name="targetId" value="SEARCH">検索</button><br>
 </form>
 <!-- 下記は適当,<a>タグでいいかなー？ -->
-<%-- <a href="/EC/Login">ログイン/ユーザー登録</a><br> --%>
 <form action="/EC/FrontController" method="post">
 <button type="submit" name="targetId" value="GOTO_LOGIN">ログイン/ユーザー登録</button>
-<%-- <a href="/EC/Cart.jsp">カート</a><br> --%>
 <button type="submit" name="targetId" value="GOTO_CART">カート</button>
 </form>
 <h1>このWEBサイトは、お寿司専門のECサイトです</h1>
