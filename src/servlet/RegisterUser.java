@@ -73,10 +73,6 @@ public class RegisterUser extends HttpServlet {
 
 			session.setAttribute("user", u);
 
-/*
-			RegisterInsert ri = new RegisterInsert();
-			ri.insert(u);
-*/
 			// 段階的に移し替えていくためにUserから情報を取得
 			UserInfo userInfo = new UserInfo ();
 			userInfo.setName ( u.getName () );
