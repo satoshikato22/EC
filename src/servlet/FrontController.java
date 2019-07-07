@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.AccountRegistrationAction;
 import action.Action;
 import action.LoginAction;
+import action.SearchAction;
 
 /**
  * Servlet implementation class FrontController
@@ -68,8 +69,17 @@ public class FrontController extends HttpServlet
 				transitionPage = accRegistAction.execute ( request );
 			break;
 
+			case "SEARCH":
+				Action searchAction = new SearchAction ();
+				transitionPage = searchAction.execute ( request );
+			break;
+
 			case "GOTO_LOGIN":
 				transitionPage = "/WEB-INF/jsp/login.jsp";
+			break;
+
+			case "GOTO_CART":
+				transitionPage = "/WEB-INF/jsp/Cart.jsp";
 			break;
 
 			case "GOTO_ACC_REGIST":
