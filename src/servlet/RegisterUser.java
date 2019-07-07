@@ -91,6 +91,17 @@ public class RegisterUser extends HttpServlet {
 			{
 				e.printStackTrace ();
 			}
+			finally
+			{
+				try
+				{
+					conManager.getConnection ().close ();
+				}
+				catch ( SQLException e )
+				{
+					e.printStackTrace ();
+				}
+			}
 
 			RequestDispatcher dispatcher =
 					request.getRequestDispatcher("/WEB-INF/jsp/RegisterThanks.jsp");

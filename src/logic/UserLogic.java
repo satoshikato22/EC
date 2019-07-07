@@ -24,6 +24,17 @@ public class UserLogic {
 			{
 				e.printStackTrace ();
 			}
+			finally
+			{
+				try
+				{
+					conManager.getConnection ().close ();
+				}
+				catch ( SQLException e )
+				{
+					e.printStackTrace ();
+				}
+			}
 
 			if ( userInfo == null )
 			{
