@@ -49,6 +49,9 @@ public void jspInit(){
 	}
 %>
 	</table>
-	<a href="/EC/TOP.jsp">戻る</a>
+	<%-- <a href="/EC/TOP.jsp">戻る</a> --%>
+	<form action="/EC/FrontController" method="post">
+	<button type="submit" name="targetId" value="GOTO_TOP">戻る</button>
+	</form>
 </body>
 </html>
