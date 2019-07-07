@@ -5,20 +5,22 @@ import java.util.regex.Pattern;
 
 import dao.ConnectionManager;
 import dao.UserInfoDAO;
-import entity.User;
 import entity.UserInfo;
 
 public class UserLogic {
-	public void execute(User u) {
-		String pass = u.getPass();
+	public boolean execute(UserInfo userInfo) {
+		// 判定結果
+		boolean result = false;
+
+		String pass = userInfo.getPass();
 		if(Pattern.matches("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,}",pass)) {
 			// メールアドレスの重複確認
-			UserInfo userInfo = null;
+			UserInfo resultUserInfo = null;
 			ConnectionManager conManager = new ConnectionManager ( "jdbc:mysql://localhost:8889/EC", "admin", "admin" );
 			try
 			{
 				UserInfoDAO userInfoDao = new UserInfoDAO ( conManager.getConnection () );
-				userInfo = userInfoDao.selectUserInfoByMail ( u.getMail () );
+				resultUserInfo = userInfoDao.selectUserInfoByMail ( userInfo.getMail () );
 			}
 			catch ( SQLException e )
 			{
@@ -36,18 +38,19 @@ public class UserLogic {
 				}
 			}
 
-			if ( userInfo == null )
+			if ( resultUserInfo == null )
 			{
-				u.setIsbool(true);
+				result = true;
 			}
 			else
 			{
-				u.setIsbool(false);
+				result = false;
 			}
 
-	}else {
-		u.setIsbool(false);
+		}else {
+			result = false;
 
+		}
+		return result;
 	}
-}
 }

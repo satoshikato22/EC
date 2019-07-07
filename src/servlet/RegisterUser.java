@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import dao.ConnectionManager;
 import dao.UserInfoDAO;
-import entity.User;
 import entity.UserInfo;
 import logic.UserLogic;
 
@@ -49,7 +48,7 @@ public class RegisterUser extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		String name = request.getParameter("name");
-		String text = request.getParameter("text");
+//		String text = request.getParameter("text");
 		String pass = request.getParameter("pass");
 		String mail = request.getParameter("mail");
 		String address = request.getParameter("address");
@@ -57,28 +56,38 @@ public class RegisterUser extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.removeAttribute("user");
 
+/*
 		User u = new User();
 		u.setName(name);
 		u.setText(text);
 		u.setPass(pass);
 		u.setMail(mail);
 		u.setAddress(address);
+*/
+		UserInfo userInfo = new UserInfo ();
+		userInfo.setName ( name );
+		userInfo.setPass ( pass );
+		userInfo.setMail ( mail );
+		userInfo.setAddress ( address );
 
 		UserLogic ul = new UserLogic();
-		ul.execute(u);
+//		ul.execute(userInfo);
 
 
 
-		if(u.getIsbool() == true && u.getSelectbool() == true) {
+//		if(u.getIsbool() == true && u.getSelectbool() == true) {
+		if(ul.execute(userInfo)) {
 
-			session.setAttribute("user", u);
+			session.setAttribute("user", userInfo);
 
+/*
 			// 段階的に移し替えていくためにUserから情報を取得
 			UserInfo userInfo = new UserInfo ();
 			userInfo.setName ( u.getName () );
 			userInfo.setPass ( u.getPass () );
 			userInfo.setMail ( u.getMail () );
 			userInfo.setAddress ( u.getAddress () );
+*/
 
 			// DBにユーザ情報登録
 			ConnectionManager conManager = new ConnectionManager ( "jdbc:mysql://localhost:8889/EC", "admin", "admin" );
@@ -108,7 +117,7 @@ public class RegisterUser extends HttpServlet {
 			dispatcher.forward(request,response);
 
 		}else {
-			session.setAttribute("user", u);
+			session.setAttribute("user", userInfo);
 			RequestDispatcher dispatcher =
 					request.getRequestDispatcher("/WEB-INF/jsp/registerError.jsp");
 			dispatcher.forward(request,response);
